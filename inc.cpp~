@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int x = 20;
+	x++;
+	x--;
+	cout << x;
+	x*=2;
+	cout <<x;
+	return 0;
+}

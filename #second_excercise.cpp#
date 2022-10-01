@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+	char name = "Bealprasim Demere";
+	int age = 20;
+	char gender = 'M';
+	char department = "Pre engineering";
+	float height = 1.78;
+	long bank_acc_no = 1000020909999;
+	float weight = 71.1;
+
+	cout<< "Student name " << name << "\n"
+		<< " \"     age " << age << "\n"
+		<< " \"     gender" << gender << "\n";    
+	return 0;
+}
+	
