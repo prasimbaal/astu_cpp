@@ -4,11 +4,8 @@ using namespace std;
 void pause(); // Prototype
 int main()
 {
-	cout << "oh what"<< endl;
-	cout<< "a happy day ";
-	cout<<"!" <<endl;
 	pause();
-	cout << "!" << endl;
+	cout << endl;
 	return 0;
 }
 void pause()
