@@ -15,6 +15,7 @@ int main()
 		<< "size of char " << sizeof(x) << "\n"
 		<< "Size of double " << sizeof(double) << "\n"
 		<< "Size of long "<< sizeof(bank) << " bytes" << endl
+		<< "size of long double " << sizeof(long double) << endl
 		<< "Size of char[10] " << sizeof(name)<<" bytes." << endl ;
 	return 0;
 }
