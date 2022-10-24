@@ -6,7 +6,7 @@ int main()
 	
 	char x = 'L';
 	long bank = 0000000000001500335;
-	char name[10] = "Avocado";
+	char name[8] = "Avocado";
 	short dorm_no = 56;
 	cout<< "Size of int " << sizeof(int) << endl
 		<< "size of wchar_t " << sizeof(wchar_t) << endl

@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int lower_check(int c);
+
+int main(void)
+{
+  char x;
+  printf("Enter a character :");
+  scanf("%c", &x);
+
+  lower_check(x);
+  return 0;
+}
+
+int lower_check(int c)
+{
+  if (c>=97 && c<=122)
+    return 1;
+  else
+    return 0;
+}

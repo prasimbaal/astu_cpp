@@ -1,9 +1,11 @@
 #include <iostream>
 using namespace std;
+int x=9;
 /*
  *main function takes no arguments
  * returns 0
  */
+
 int main()
 {
 	float area;
