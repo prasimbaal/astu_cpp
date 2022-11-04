@@ -7,9 +7,10 @@ int main ()
 	cout<<"enter your name and age ";
 	cin>>name>>age;
 	if(age>=21)
-		cout<<name<<"is eligible";
+		cout<<name<<" is eligible. /n";
 	else
-		cout<<name<<"is not eligible"<<endl;
+		cout<<name<<" is not eligible."<<endl;
 	return 0;
-	   }
+}
+
 	  
