@@ -1,16 +1,14 @@
 #include <iostream>
 using namespace std;
 
-int fibonacci(int n){
-	if(n==1)
-		return 1;
-	if(n==0)
-		return 0;
+unsigned fibonacci(unsigned n){
+	if(n<2)
+		return n;
 	else
 		return fibonacci(n-1)+fibonacci(n-2);
 }
 int main(){
-	int i, fib;
+	unsigned i, fib;
 	cin>>i;
 	fib=fibonacci(i);
 	cout<<"Fibonacci of "<<i<<" is:"<<fib<<endl;
