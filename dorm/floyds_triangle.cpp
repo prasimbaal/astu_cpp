@@ -5,16 +5,13 @@ int main(){
   int i(1),k,n;
   cout<<"Enter a number:";
   cin>>n;
+  int j(1);
   while(i<=n){
-	  int j=0;
 	  for(k=1;k<i;k++){
-		  if(i==1)
-			  cout<<i<<" ";
-		  if(i>1)
-			  cout<<i+k<<" ";
+		  cout<<j<<" ";
+			  j++;
 	  }
     cout<<endl;
-	j+=i;
     i++;
   }
   return(0);
