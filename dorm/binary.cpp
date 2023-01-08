@@ -1,12 +1,18 @@
 #include <iostream>
+#include <iomanip>
+#include <math.h>
 using namespace std;
 
 int main(){
-  int x,y;
-  char ch;
-
-  cin>>x>>ch;
-  cout<<bin<<x;
-  cout<<endl<<bin<<ch<<"\n";
+  float f(9.8);
+  char y('$');
+  //  char ch;
+  int i = 1e1;
+  int x =10;
+  cout<<scientific<<"x"<<endl;
+  cout<<hex<<x;
+  cout<<endl<<sqrtf(f)<<endl;
+			// cout<< static_cast<int>(y);
+  cout<<endl<<setbase(2)<<y<<"\n";
   return 0;
 }

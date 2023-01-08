@@ -12,9 +12,10 @@ void add_two(int a, int b, int c){
 	c=c+2;
 }
 int main(){
-	int x=2,y=3,z=2;
-	//	duplicate(x,y,z);
+	int x,y,z;
+	cin>>x>>y>>z;
+	//duplicate(x,y,z);
 	add_two(x,y,z);
-	cout<<x<<y<<z<<endl;
+	cout<<x<<","<<y<<","<<z<<endl;
 	return 0;
 }

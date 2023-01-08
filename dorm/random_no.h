@@ -1,8 +1,6 @@
 int loop_rand(){
-  int number;
+  int i;
   srand(time(0));
-  for(int i=0;i<1;i++){
-    number=rand()%10;
-    return number;
-  }
+  for(i=0;i<1;i++)
+	  return rand()%10;
 }
