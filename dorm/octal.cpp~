@@ -1,9 +1,0 @@
-#include <iostream>
-using namespace std;
-
-int main(){
-  char x = '\44';
-  char y = '\x55';
-  cout<<x<<"\t"<<y<<"\n";
-  return 0;
-}

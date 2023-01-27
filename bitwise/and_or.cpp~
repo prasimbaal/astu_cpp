@@ -1,0 +1,11 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main(){
+	int a(0b0101);
+	int b(0b10110);\
+	b<<=4;
+	int c=b|a;
+	cout<<bitset<9>(c)<<endl;
+}
