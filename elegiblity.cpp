@@ -1,11 +1,14 @@
 #include <iostream>
+#include <string.h>
+
 using namespace std;
 int main ()
 {
 	string name;
 	int age;
 	cout<<"enter your name and age ";
-	cin>>name>>age;
+	getline(cin, name);
+	cin>>age;
 	if(age>=21)
 		cout<<name<<" is eligible. /n";
 	else
