@@ -1,0 +1,4 @@
+int binary_search(int array[], int item, int size){
+	end=size-1;
+	l=0;
+	
