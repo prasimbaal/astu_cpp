@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+struct node{
+	string full_name;
+	int data;
+	node *link,*prev;
+};
+
+node *add_2_head(node *head,node *tail,int data,string name){
+	node *new_node=new node;
+	new_node->data=data;
+	new_node->full_name=name;
+	if(head==NULL){
+  		new_node->prev=NULL;
+		new_node->link=NULL;
+		tail=new_node;
+   	}
+	else{
+		node *tmp=head;
+		new_node->prev=NULL;
+	   	new_node->link=head;
+   		head->prev=new_node;
+	}
+   	return new_node;
+}
+void trav(node *head){
+	node *tmp=head;
+	if(head==NULL)
+		cout<<"Empty list"<<endl;
+	else{
+		while(tmp!=NULL){
+			cout<<tmp->full_name<<"\t"<<tmp->data<<endl;
+			tmp=tmp->link;
+		}
+	}
+}
+//node *add_after(
+void reverse(node *tail){
+	node *tmp=tail;
+	while(tmp!=NULL){
+		cout<<tmp->full_name<<"\t"<<tmp->data<<endl;
+		tmp=tmp->prev;
+	}
+}
+int main(){
+	node *head=NULL;
+	node *tail=NULL;
+	int n,data;
+	cout<<"Enter how many new node to add to head: "<<endl;
+	cin>>n;
+	cin.ignore();
+	string name;
+	for(int i=0;i<n;i++){
+		cout<<"Enter Full name for student: ";
+		getline(cin,name);
+		cout<<"Enter id number: ";
+		cin>>data;
+		head=add_2_head(head,tail,data,name);
+		cin.ignore();
+	}
+		trav(head);
+		cout<<"--------------------------------------------------------"<<endl;
+		reverse(tail);
+}
