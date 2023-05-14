@@ -25,7 +25,7 @@ void add_student(){
 	stud_profile *temp=head;
 	int id,sect;	
 	string name,dept;
-	cout<<"Enter name of student to register: "<<endl;
+	cout<<"Enter name of student to register: ";
 	cin.ignore();
 	getline(cin,name);
 	new_student->name=name;
@@ -33,7 +33,7 @@ void add_student(){
 	id = rand()%1000;
 	new_student->id=id;
 	new_student->section=1+(rand()%45);
-	cout<<"What is "<<name<<"'s preferred field of study"<<endl;
+	cout<<"What is "<<name<<"'s preferred field of study: ";
 	getline(cin,dept);
 	new_student->dept=dept;
 	cout<<"Gender: ";
@@ -74,10 +74,12 @@ void view_profile(){
 /*DELETE LAST SAVED STUDENT i.e pop method in stack*/
 void delete_profile(){
 	stud_profile *temp=head;
-	if(head->next==head){
+	if(head==NULL) cout<<"Nothing to delete"<<endl;
+	else if(head->next==head){
 		head=NULL;
 		free(head);
 	}
+   
 	else{
 		while(temp->next!=head)
 			temp=temp->next;
@@ -169,7 +171,7 @@ int main(){
 	
  menu:
 	cout<<"Press '0' to add students"<<endl;
-	cout<<"Press '1' to undo last saved student"<<endl;
+	cout<<"Press '1' to undo student in stack"<<endl;
 	cout<<"Press '2' to edit student's profile using ID"<<endl;
 	cout<<"Press '3' to view unsaved student profiles in the stack"<<endl;
 	cout<<"Press '4' to save session data into file"<<endl;
@@ -182,7 +184,7 @@ int main(){
 		cin>>choice;
 		switch(choice){
 		case 0:
-			cout<<"How many students will you be adding?"<<endl;
+			cout<<"How many students will you be adding? ";
 			cin>>n;
 			for(int i=0;i<n;i++)
 				add_student();
