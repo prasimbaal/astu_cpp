@@ -1,4 +1,6 @@
-
+#include <iostream>
+#include <fstream>
+#include <string.h>
 #include <sstream>
 
 using namespace std;
@@ -18,4 +20,13 @@ void search_edit(string search, string replace){
 		out_file<<str;
 	}
 	else cout<<"EMPTY BUFFER"<<endl;	
+}
+
+int main(){
+	string str;
+	ifstream myfile("student_data.txt");
+	while(!myfile.eof()){
+		getline(myfile,str);
+		cout<<str<<endl;
+	}
 }

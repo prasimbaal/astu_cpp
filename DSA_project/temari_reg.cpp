@@ -146,17 +146,12 @@ void save_to_file(){
 
 void view_file(){
 	string line;
-	ifstream stud_data("student_data.txt");	
-	cin.ignore();
-	if(stud_data.is_open()){
-		while(!stud_data.eof()){
-			getline(stud_data, line);
-			cout<<line<<endl;
-		}
+	ifstream stud_data("student_data.txt");
+	while(!stud_data.eof()){
+		getline(stud_data,line);
+		cout<<line<<endl;
 	}
-	else cout<<"NOTHING TO SEE HERE!"<<endl;
-	stud_data.close();
-}
+  }
 
 /*void admin_features(){
 	string str;
@@ -168,6 +163,7 @@ int main(){
 	cout<<"THIS IS A TOOL TO ADMIT STUDENTS INTO THE INSTITUTION'S DATABASE AND PERFORM DIFFERENT OPERATIONS"<<endl;
 	int edit,choice,n;
 	string x;
+	//	view_file();
 	
  menu:
 	cout<<"Press '0' to add students"<<endl;
@@ -211,18 +207,18 @@ int main(){
 		case 6:
 			goto menu;
 			break;
-		case 5:
-			cout<<"TRYING TO ACCESS SENSITICE DATA ENTER PASSWORD TO PROCEED."<<endl;
+   		case 5:
+			cout<<"TRYING TO ACCESS SENSITIVE DATA ENTER PASSWORD TO PROCEED."<<endl;
 			cin.ignore();
 			getline(cin,x);
 			if(x==PASS)
-				view_file();			
+				view_file();
 			else
 				cout<<"OPERATION CANNOT BE PERFORMED BECAUSE USER DOES NOT HAVE ACCESS TO THIS FEATURE."<<endl;
 			break;
-		default:
-			cout<<"Wrong Entry!"<<endl;
-			break;
+		 	default:
+				cout<<"Wrong Entry!"<<endl;
+				break;
 		}
 	}while(choice!=7);
 }
