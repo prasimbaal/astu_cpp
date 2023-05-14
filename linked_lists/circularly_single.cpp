@@ -56,3 +56,17 @@ registr *add_2_head(string name, string department, string id){
 		new_element->link=new_element;
 	return(new_element);
 }
+
+/*registr *add_2_tail(string name, string department, string id){
+	registr *new_node= new registr;
+	registr *tmp=head;
+	new_node->student_name=name;
+	new_node->department=department;
+	new_node->id=id;
+	if(head==NULL){
+   		tail=new_node;
+		new_node->link=head;
+	}
+	else{
+		new_node->link=
+*/

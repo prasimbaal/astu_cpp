@@ -20,11 +20,12 @@ void add_2_head(int data){
 		new_node->prev=NULL;
 		tail=new_node;
 	}
+	else{
 	new_node->prev=NULL;
 	new_node->link=head;
 	head->prev=new_node;
 	head=new_node;
-
+	}
 }
 void traverse_f(double_node *head){
 	double_node *tmp;
