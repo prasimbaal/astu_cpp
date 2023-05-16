@@ -1,12 +1,12 @@
 #include <iostream>
 #include<stdlib.h>
-#include<string.h>
-#include<fstream>
-#include <iomanip>
+#include<string.h> //For manipulating strings
+#include<fstream>  //file managment librarary
+#include <iomanip> //setw
 
 using namespace std;
 
-const string PASS="SecurityxThingz366";
+const string PASS="/2002366*";
 
 struct stud_profile{
 	string name;
@@ -23,7 +23,7 @@ struct stud_profile{
 void add_student(){
 	stud_profile *new_student= new stud_profile;
 	stud_profile *temp=head;
-	int id,sect;	
+	int id,sect;
 	string name,dept;
 	cout<<"Enter name of student to register: ";
 	cin.ignore();
@@ -53,6 +53,7 @@ void add_student(){
 		temp->next=new_student;
 		head=new_student;	
 		}
+	cout<<"Student added and given ID number: "<<new_student->id<<" and enrolled in section: "<<new_student->section<<endl;
 }
 
 
@@ -62,12 +63,12 @@ void view_profile(){
 	if(head==NULL)
 		cout<<"EMPTY LIST"<<endl;
 	else{
-		cout<<"NAME"<<setw(22)<<"ID"<<setw(12)<<"Section"<<setw(21)<<"Preferred field"<<setw(10)<<"SEX"<<endl;	
+		cout<<setw(22)<<"NAME"<<setw(12)<<"ID"<<setw(12)<<"Section"<<setw(23)<<"Preferred field"<<setw(10)<<"SEX"<<endl;	
 		do{
-			cout<<temp->name<<setw(10)<<temp->id<<setw(5)<<temp->section<<setw(22)<<temp->dept<<setw(10)<<temp->sex<<endl;
+			cout<<temp->name<<setw(13)<<temp->id<<setw(5)<<temp->section<<setw(22)<<temp->dept<<setw(10)<<temp->sex<<endl;
 			temp=temp->next;
 		}while(temp!=head);		
-		cout<<"END OF STACK"<<endl;
+		cout<<"---------------------------END OF LIST--------------------------------------"<<endl;
 }
 }
 
@@ -107,12 +108,13 @@ void edit_profile(int id){
 		if(temp->id==id){
 			cout<<" 'n' to edit name \n 'f' to edit preferred field of study? \n 's' to edit gender entry typo"<<endl;
 			cin>>ch;
+			cin.ignore();
 			if(ch=='n'){
 				cout<<"Enter new name";
 				getline(cin,temp->name);
 					}
 			else if(ch == 'f'){
-				cout<<"What's your new preference?"<<endl;
+				cout<<"What's your new preference: ";
 				getline(cin,temp->dept);
 			}
 			else if(ch=='s'){
@@ -127,6 +129,7 @@ void edit_profile(int id){
 	}
 }
 
+/*POPs profiles in stack and appends them into file. i.e Database*/ 
 void save_to_file(){
 	stud_profile *temp=head;
 	ofstream profile;
@@ -136,7 +139,8 @@ void save_to_file(){
 	}
 	else{
 		do{
-			profile<<temp->name<<setw(3)<<temp->id<<setw(6)<<temp->section<<setw(9)<<temp->dept<<setw(12)<<temp->sex<<endl;
+			profile<<"NAME: "<<temp->name<<"\tID: "<<temp->id<<"\t Section: "<<temp->section<<"\nDepartment of choice: "<<temp->dept<<"\nGender: "<<temp->sex<<endl;
+			profile<<"----------------------------------------------------------------------------------------"<<endl;
 			free(temp);
 			temp=temp->next;
 		}while(temp!=head);
@@ -144,6 +148,7 @@ void save_to_file(){
 	profile.close();
 }
 
+/*FUNCTION TO VIEW content of student_data.txt FILE*/
 void view_file(){
 	string line;
 	ifstream stud_data("student_data.txt");
@@ -151,6 +156,7 @@ void view_file(){
 		getline(stud_data,line);
 		cout<<line<<endl;
 	}
+	stud_data.close();
   }
 
 /*void admin_features(){
@@ -159,24 +165,24 @@ void view_file(){
 	cout<<"Admin's can access student files to view and edit \nWhat will you like to do?"<<endl;
 	cout<<"'v' to view student profiles in the database.\n'e' to edit student information"
 }*/
+
+
 int main(){
-	cout<<"THIS IS A TOOL TO ADMIT STUDENTS INTO THE INSTITUTION'S DATABASE AND PERFORM DIFFERENT OPERATIONS"<<endl;
+	cout<<"THIS IS A TOOL TO ADMIT STUDENTS INTO THE INSTITUTION'S DATABASE AND PERFORM DIFFERENT OPERATIONS."<<endl;
 	int edit,choice,n;
 	string x;
-	//	view_file();
-	
  menu:
-	cout<<"Press '0' to add students"<<endl;
-	cout<<"Press '1' to undo student in stack"<<endl;
-	cout<<"Press '2' to edit student's profile using ID"<<endl;
-	cout<<"Press '3' to view unsaved student profiles in the stack"<<endl;
-	cout<<"Press '4' to save session data into file"<<endl;
-	cout<<"Press '5' to view student's profile in the file(NEED TO BE AN ADMIN)."<<endl;
-	cout<<"Press '6' to display menu"<<endl;	
-	cout<<"Press '7' to end the session"<<endl;
+	cout<<"|   Press [0] to add students."<<endl;
+	cout<<"|   Press [1] to DELETE LAST STUDENT IN THE LIST(STACK)."<<endl;
+	cout<<"|   Press [2] to edit unsaved student's profile using ID."<<endl;
+	cout<<"|   Press [3] to view unsaved student profiles in the stack."<<endl;
+	cout<<"|   Press [4] to save session data into file."<<endl;
+	cout<<"|   Press [5] to view student's profile in the file(NEED TO HAVE ADMIN RIGHTS)."<<endl;
+	cout<<"|   Press [6] to display menu."<<endl;	
+	cout<<"|   Press [7] to end the session."<<endl;
 
 	do{
-		cout<<"pick what you want to do: ";
+		cout<<"WHAT WILL YOU BE DOING: ";
 		cin>>choice;
 		switch(choice){
 		case 0:
@@ -184,12 +190,14 @@ int main(){
 			cin>>n;
 			for(int i=0;i<n;i++)
 				add_student();
+			cout<<"OPERATION SUCCESSFUL REDIRECTING YOU TO THE MENU......................................."<<endl;
+			goto menu;
 			break;
 		case 1:
 			delete_profile();
 			break;
 		case 2:
-			cout<<"You have choosent to edit a student's profile,\n Please Enter studnet's ID: ";
+			cout<<"You have choosen to edit a student's profile,\n Please Enter studnet's ID: ";
 			cin>>edit;
 			edit_profile(edit);
 			break;
@@ -199,7 +207,7 @@ int main(){
 		case 4:
 			save_to_file();
 			head==NULL; /*STARTING A NEW STACK TO AVOID REPETITION FOR THE NEXT SAVE*/
-			cout<<"THIS SESSION HAS BEEN SAVED, START A NEW ONE BY adding a student";
+			cout<<"OPERATION SUCCESSFUL, START A NEW LIST BY PRESSING [0] ";
 			break;
 		case 7:
 			cout<<"SESSION ENDED, GOODBYE!"<<endl;
@@ -208,17 +216,20 @@ int main(){
 			goto menu;
 			break;
    		case 5:
-			cout<<"TRYING TO ACCESS SENSITIVE DATA ENTER PASSWORD TO PROCEED."<<endl;
+			/*while(i!=PASS)
+			  cout<<"TRY["<<i<<"] YOU ARE TRYING TO ACCESS SENSITIVE DATA PLEASE ENTER PASSWORD TO PROCEED: ";*/
 			cin.ignore();
 			getline(cin,x);
 			if(x==PASS)
 				view_file();
 			else
 				cout<<"OPERATION CANNOT BE PERFORMED BECAUSE USER DOES NOT HAVE ACCESS TO THIS FEATURE."<<endl;
+   
 			break;
 		 	default:
 				cout<<"Wrong Entry!"<<endl;
 				break;
 		}
 	}while(choice!=7);
+	return 0;
 }

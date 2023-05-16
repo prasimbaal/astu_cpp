@@ -1,4 +1,4 @@
-Tr342    43       EE           F
-ghgh510    40       SE           M
-abel Desalegn425    40  Theatre           F
-Beal508    18      SWE           M
+NAME: xx	ID: 277	 Section: 8
+Department of choice: Mech
+Gender: M
+----------------------------------------------------------------------------------------
