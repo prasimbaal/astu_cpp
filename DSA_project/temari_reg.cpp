@@ -10,8 +10,7 @@ const string PASS="/2002366*";
 
 struct stud_profile{
 	string name;
-	int id;
-	string dept;
+	string dept,id;
 	int section;
 	char sex;
 	stud_profile *next;
@@ -23,16 +22,16 @@ struct stud_profile{
 void add_student(){
 	stud_profile *new_student= new stud_profile;
 	stud_profile *temp=head;
-	int id,sect;
-	string name,dept;
+	int sect;
+	string name,dept,id;
 	cout<<"Enter name of student to register: ";
 	cin.ignore();
 	getline(cin,name);
 	new_student->name=name;
 	srand(time(NULL));
-	id = rand()%1000;
-	new_student->id=id;
-	new_student->section=1+(rand()%45);
+	//used string.h library method to concatenate string literal and random integer values
+   	new_student->id="frshmn"+to_string(2000+rand()%100000); 
+	new_student->section=1+(rand()%25);
 	cout<<"What is "<<name<<"'s preferred field of study: ";
 	getline(cin,dept);
 	new_student->dept=dept;
@@ -53,8 +52,11 @@ void add_student(){
 		temp->next=new_student;
 		head=new_student;	
 		}
-	cout<<"Student added and given ID number: "<<new_student->id<<" and enrolled in section: "<<new_student->section<<endl;
+	cout<<"------------------------------------------------------------------------------------------------"<<endl;
+		cout<<"| Student added and given ID number: "<<new_student->id<<" and enrolled in section: "<<new_student->section<<"|"<<endl;
+	cout<<"-------------------------------------------------------------------------------------------------------------"<<endl;
 }
+
 
 
 /*Function displays from last registered student to first, LIFO*/
@@ -63,9 +65,9 @@ void view_profile(){
 	if(head==NULL)
 		cout<<"EMPTY LIST"<<endl;
 	else{
-		cout<<setw(22)<<"NAME"<<setw(12)<<"ID"<<setw(12)<<"Section"<<setw(23)<<"Preferred field"<<setw(10)<<"SEX"<<endl;	
+		cout<<"NAME"<<setw(21)<<"ID"<<setw(16)<<"Section"<<setw(23)<<"Preferred field"<<setw(10)<<"SEX"<<endl;	
 		do{
-			cout<<temp->name<<setw(13)<<temp->id<<setw(5)<<temp->section<<setw(22)<<temp->dept<<setw(10)<<temp->sex<<endl;
+			cout<<temp->name<<setw(22)<<temp->id<<setw(16)<<temp->section<<setw(22)<<temp->dept<<setw(10)<<temp->sex<<endl;
 			temp=temp->next;
 		}while(temp!=head);		
 		cout<<"---------------------------END OF LIST--------------------------------------"<<endl;
@@ -93,39 +95,41 @@ void delete_profile(){
 }
 
 /*ID is passed because ID's stay the same through out time of study*/			
-void edit_profile(int id){
+void edit_profile(string id){
 	stud_profile *temp=head;
-	string edit;
-	char ch,ed;
+  	char ch;
 
 	if(head==NULL){
 		cout<<"THERE ARE CURRENTLY NO FILES TO EDIT IN THE LIST!"<<endl;
 	}
 	else{
-		do{
+	while(temp->id!=id && temp->next!=head);
 	  		temp=temp->next;
-		}while(temp->id!=id && temp!=head);
+	
 		if(temp->id==id){
-			cout<<" 'n' to edit name \n 'f' to edit preferred field of study? \n 's' to edit gender entry typo"<<endl;
+			cout<<"[n] to edit name \n[f] to edit preferred field of study? \n[s] to edit gender entry typo \nChoose your letter: ";
 			cin>>ch;
 			cin.ignore();
 			if(ch=='n'){
-				cout<<"Enter new name";
+				cout<<"Enter new name: ";
 				getline(cin,temp->name);
+				cout<<"NAME EDITED SUCCESSFULLY."<<endl;
 					}
 			else if(ch == 'f'){
 				cout<<"What's your new preference: ";
 				getline(cin,temp->dept);
+				cout<<"---PREFERRED FIELD OF STUDY EDITED SUCCESSFULLY.---"<<endl;
 			}
 			else if(ch=='s'){
 				cout<<"current gender: "<<temp->sex<<", Enter your edit";
 		 		cin>>temp->sex;
+				cout<<"GENDER CORRECTION DONE SUCCESSFULLY."<<endl;
 			}
 			else
-				cout<<"Wrong Entry!"<<endl;
+				cout<<"-------------------Wrong Entry!-------------------"<<endl;
 		}
 		else if(temp->id!=id)
-			cout<<"Make sure you entered the right ID number!"<<endl; 
+			cout<<"Student with provided ID doesn't exist. Make sure you entered the right ID number!"<<endl; 
 	}
 }
 
@@ -139,7 +143,7 @@ void save_to_file(){
 	}
 	else{
 		do{
-			profile<<"NAME: "<<temp->name<<"\tID: "<<temp->id<<"\t Section: "<<temp->section<<"\nDepartment of choice: "<<temp->dept<<"\nGender: "<<temp->sex<<endl;
+			profile<<"ID: "<<temp->id<<"\nNAME: "<<temp->name<<"\tID: "<<"\t Section: "<<temp->section<<"\nDepartment of choice: "<<temp->dept<<"\nGender: "<<temp->sex<<endl;
 			profile<<"----------------------------------------------------------------------------------------"<<endl;
 			free(temp);
 			temp=temp->next;
@@ -168,9 +172,10 @@ void view_file(){
 
 
 int main(){
+	cout<<"--------------------------------------------------------STARTING----------------------------------"<<endl;
 	cout<<"THIS IS A TOOL TO ADMIT STUDENTS INTO THE INSTITUTION'S DATABASE AND PERFORM DIFFERENT OPERATIONS."<<endl;
-	int edit,choice,n;
-	string x;
+	int choice,n,count(1);
+	string x="",edit="";
  menu:
 	cout<<"|   Press [0] to add students."<<endl;
 	cout<<"|   Press [1] to DELETE LAST STUDENT IN THE LIST(STACK)."<<endl;
@@ -190,15 +195,16 @@ int main(){
 			cin>>n;
 			for(int i=0;i<n;i++)
 				add_student();
-			cout<<"OPERATION SUCCESSFUL REDIRECTING YOU TO THE MENU......................................."<<endl;
+			cout<<"OPERATION SUCCESSFUL REDIRECTING YOU TO  MENU......................................."<<endl;
 			goto menu;
 			break;
 		case 1:
 			delete_profile();
 			break;
 		case 2:
+			cin.ignore();
 			cout<<"You have choosen to edit a student's profile,\n Please Enter studnet's ID: ";
-			cin>>edit;
+			getline(cin,edit);
 			edit_profile(edit);
 			break;
 		case 3:
@@ -216,11 +222,14 @@ int main(){
 			goto menu;
 			break;
    		case 5:
-			/*while(i!=PASS)
-			  cout<<"TRY["<<i<<"] YOU ARE TRYING TO ACCESS SENSITIVE DATA PLEASE ENTER PASSWORD TO PROCEED: ";*/
-			cin.ignore();
-			getline(cin,x);
-			if(x==PASS)
+			cout<<"YOU ARE TRYING TO ACCESS SENSITIVE DATA PLEASE ENTER PASSWORD TO PROCEED. ";
+			while(x!=PASS && count<4){
+				cout<<"TRY["<<count<<"]: ";
+		   		cin.ignore();
+				getline(cin,x);
+				count++;
+			}
+	   	  	if(x==PASS)
 				view_file();
 			else
 				cout<<"OPERATION CANNOT BE PERFORMED BECAUSE USER DOES NOT HAVE ACCESS TO THIS FEATURE."<<endl;
