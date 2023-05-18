@@ -25,8 +25,12 @@ void search_edit(string search, string replace){
 int main(){
 	string str;
 	ifstream myfile("student_data.txt");
-	while(!myfile.eof()){
-		getline(myfile,str);
-		cout<<str<<endl;
-	}
+	if(myfile.is_open()){
+		while(!myfile.eof()){
+			getline(myfile,str);
+			cout<<str<<endl;
+			}
+}
+	else cout<<"File doesn't exist."<<endl;
+	int choice;
 }

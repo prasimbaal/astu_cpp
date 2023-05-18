@@ -143,7 +143,7 @@ void save_to_file(){
 	}
 	else{
 		do{
-			profile<<"ID: "<<temp->id<<"\nNAME: "<<temp->name<<"\tID: "<<"\t Section: "<<temp->section<<"\nDepartment of choice: "<<temp->dept<<"\nGender: "<<temp->sex<<endl;
+			profile<<"ID: "<<temp->id<<"\nNAME: "<<temp->name<<"\t Section: "<<temp->section<<"\nDepartment of choice: "<<temp->dept<<"\nGender: "<<temp->sex<<endl;
 			profile<<"----------------------------------------------------------------------------------------"<<endl;
 			free(temp);
 			temp=temp->next;
@@ -156,11 +156,17 @@ void save_to_file(){
 void view_file(){
 	string line;
 	ifstream stud_data("student_data.txt");
-	while(!stud_data.eof()){
-		getline(stud_data,line);
-		cout<<line<<endl;
+	if(stud_data.is_open()){
+		while(!stud_data.eof()){
+			getline(stud_data,line);
+			cout<<line<<endl;
+		}
+		stud_data.close();
 	}
-	stud_data.close();
+	else{
+		cout<<"FILE DOESN'T EXIST SAVE A STUDENT PROFILE BY PRESSING [0]"<<endl;
+		stud_data.close();
+	}
   }
 
 /*void admin_features(){
@@ -225,15 +231,15 @@ int main(){
 			cout<<"YOU ARE TRYING TO ACCESS SENSITIVE DATA PLEASE ENTER PASSWORD TO PROCEED. ";
 			while(x!=PASS && count<4){
 				cout<<"TRY["<<count<<"]: ";
-		   		cin.ignore();
-				getline(cin,x);
+				cin>>x;
 				count++;
 			}
 	   	  	if(x==PASS)
 				view_file();
 			else
 				cout<<"OPERATION CANNOT BE PERFORMED BECAUSE USER DOES NOT HAVE ACCESS TO THIS FEATURE."<<endl;
-   
+			x="";
+			count=1;
 			break;
 		 	default:
 				cout<<"Wrong Entry!"<<endl;

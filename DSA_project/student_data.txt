@@ -1,0 +1,5 @@
+ID: frshmn72501
+NAME: Kunta	ID: 	 Section: 5
+Department of choice: Hopa
+Gender: M
+----------------------------------------------------------------------------------------
